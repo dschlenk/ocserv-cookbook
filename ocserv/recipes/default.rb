@@ -6,10 +6,12 @@
 #
 # All rights reserved - Do Not Redistribute
 #
-package 'epel-release' do
-  action :install
+include_recipe 'ocserv::install_ocserv'
+
+firewall 'default' do
+  action :disable
 end
 
-package 'openvpn' do
-  action :install
-end
+include_recipe 'simple_iptables::default'
+
+
