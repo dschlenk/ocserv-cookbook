@@ -1,6 +1,6 @@
 # ocserv Cookbook
 
-Installs and configures ocserv
+Installs and configures ocserv, the [OpenConnect server](http://www.infradead.org/ocserv/manual.html).
 
 ## Requirements
 
