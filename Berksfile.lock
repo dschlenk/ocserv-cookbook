@@ -4,12 +4,12 @@ DEPENDENCIES
     metadata: true
 
 GRAPH
-  chef-sugar (3.4.0)
-  firewall (2.5.2)
-    chef-sugar (>= 0.0.0)
+  firewalld (1.1.1)
+  line (0.6.3)
   ocserv (0.1.0)
-    firewall (>= 0.0.0)
+    firewalld (>= 0.0.0)
+    line (>= 0.0.0)
     simple_iptables (>= 0.0.0)
     yum (>= 0.0.0)
-  simple_iptables (0.7.5)
-  yum (4.0.0)
+  simple_iptables (0.8.0)
+  yum (4.1.0)

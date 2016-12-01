@@ -18,9 +18,8 @@
 # limitations under the License.
 
 include_recipe 'ocserv::install_ocserv'
-
-firewall 'default' do
-  action :disable
+if node['platform_family'] == 'rhel' && node['platform_version'].to_f >= 7.0
+  include_recipe 'firewalld::disable'
 end
-
 include_recipe 'simple_iptables::default'
+include_recipe 'ocserv::configure_ocserv'

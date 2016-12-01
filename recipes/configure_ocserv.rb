@@ -19,4 +19,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+ocserv_config 'dpd' do
+  value '91'
+end
 
+ocserv_config 'auth' do
+  value '"certificate"'
+end
