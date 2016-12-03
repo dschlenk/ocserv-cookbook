@@ -49,13 +49,13 @@ Depends on the following cookbooks
     <td><tt>nil</tt></td>
   </tr>
   <tr>
-    <td><tt>['ocserv']['config']['tcp_port']</tt></td>
+    <td><tt>['ocserv']['config']['tcp-port']</tt></td>
     <td>Integer</td>
     <td>The TCP port that ocserv will use for TLS.</td>
     <td><tt>443</tt></td>
   </tr>
   <tr>
-    <td><tt>['ocserv']['config']['udp_port']</tt></td>
+    <td><tt>['ocserv']['config']['udp-port']</tt></td>
     <td>Integer</td>
     <td>The UDP port that ocserv will use for DTLS.</td>
     <td><tt>443</tt></td>
@@ -72,7 +72,7 @@ Depends on the following cookbooks
 
 ### ocserv::default
 
-This recipe installs the `epel-release` package and `ocserv` package from EPEL. If either or both of `node['ocserv']['ipv4-network']` or `node['ocserv']['ipv6-network']` are set, the ocserv service will be enabled and started. On CentOS 7.x firewalld is replaced with iptables. Any configuration key/values added to `node['ocserv']['config']` will be set in the ocserv configuration file and iptables rules are created to allow traffic to the ports specified in `node['ocserv']['config']['tcp_port']` and `node['ocserv']['config']['udp_port']` (both default to 443). 
+This recipe installs the `epel-release` package and `ocserv` package from EPEL. If either or both of `node['ocserv']['ipv4-network']` or `node['ocserv']['ipv6-network']` are set, the ocserv service will be enabled and started. On CentOS 7.x firewalld is replaced with iptables. Any configuration key/values added to `node['ocserv']['config']` will be set in the ocserv configuration file and iptables rules are created to allow traffic to the ports specified in `node['ocserv']['config']['tcp-port']` and `node['ocserv']['config']['udp-port']` (both default to 443). 
 
 ### ocserv::install_ocserv
 
