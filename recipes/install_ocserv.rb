@@ -31,6 +31,21 @@ package 'ocserv' do
   source ocserv_dest if ocserv_dest
   action :install
 end
+
+if node['platform_family'] == 'rhel' && node['platform_version'].to_i == 6
+  # The init script ocserv ships with errors but returns 0 when you run reload
+  # when not already running and errors when you run status when not running.
+  # So we replace it with a less terrible one. 
+  # Wrappers, feel free to do the same, just change
+  # attribute node['ocserv']['rhel6_init_cookbook'] to your cookbook.
+  cookbook_file '/etc/init.d/ocserv' do
+    cookbook node['ocserv']['rhel6_init_cookbook']
+    source 'ocserv-init.sh'
+    owner 'root'
+    group 'root'
+    mode 00755
+  end
+end
 service_actions = [:enable, :start]
 if node['ocserv']['config']['ipv4-network']
   ocserv_config 'ipv4-network' do

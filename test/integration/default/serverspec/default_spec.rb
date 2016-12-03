@@ -6,8 +6,13 @@ describe 'when a node has converged ocserv::default' do
   end
 
   it 'has udp and tcp ports 443 open' do
-    expect(iptables).to have_rule('-A ocserv -p tcp -m tcp --dport 443 -m comment --comment ocserv -j ACCEPT')
-    expect(iptables).to have_rule('-A ocserv -p udp -m udp --dport 443 -m comment --comment ocserv -j ACCEPT')
+    if os[:release].to_i == 7
+      expect(iptables).to have_rule('-A ocserv -p tcp -m tcp --dport 443 -m comment --comment ocserv -j ACCEPT')
+      expect(iptables).to have_rule('-A ocserv -p udp -m udp --dport 443 -m comment --comment ocserv -j ACCEPT')
+    else
+      expect(iptables).to have_rule('-A ocserv -p tcp -m tcp --dport 443 -m comment --comment "ocserv" -j ACCEPT')
+      expect(iptables).to have_rule('-A ocserv -p udp -m udp --dport 443 -m comment --comment "ocserv" -j ACCEPT')
+    end
   end
 
   describe file('/etc/ocserv/ocserv.conf') do

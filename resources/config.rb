@@ -20,7 +20,7 @@ action :create do
       path node['ocserv']['config_file']
       pattern "^#{name} = "
       line "#{name} = #{value}"
-      notifies :reload, 'service[ocserv]'
+      notifies :reload, 'service[ocserv]' unless (node['ocserv']['config']['ipv4-network'].nil? && node['ocserv']['config']['ipv6-network'].nil?)
     end
   end
 end
