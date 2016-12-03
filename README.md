@@ -10,7 +10,7 @@ CentOS 6.8+, 7.2+ x86_64.
 
 ### Chef
 
-Chef 12+, preferably 12.5.1+ but older with `compat-resources` should work.
+Chef 12+, preferably 12.5.1+ but older with `compat-resource` should work.
 
 ### Cookbooks
 
