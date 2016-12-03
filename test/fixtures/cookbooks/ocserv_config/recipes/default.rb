@@ -1,6 +1,6 @@
 #
-# Cookbook Name:: ocserv
-# Recipe:: configure_ocserv
+# Cookbook Name:: ocserv_config
+# Recipe:: default
 #
 # Copyright 2016, ConvergeOne Holding Corp.
 #
@@ -19,10 +19,15 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
+include_recipe 'ocserv::default'
 ocserv_config 'dpd' do
   value '91'
 end
 
 ocserv_config 'auth' do
   value '"certificate"'
+end
+
+ocserv_config 'dtls-psk' do
+  value 'true'
 end

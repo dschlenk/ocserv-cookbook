@@ -22,4 +22,15 @@ if node['platform_family'] == 'rhel' && node['platform_version'].to_f >= 7.0
   include_recipe 'firewalld::disable'
 end
 include_recipe 'simple_iptables::default'
-include_recipe 'ocserv::configure_ocserv'
+
+node['ocserv']['config'].each do |k, v|
+  ocserv_config k do
+    value v.to_s
+  end
+end
+
+simple_iptables_rule 'ocserv' do
+  rule ["--proto tcp --dport #{node['ocserv']['config']['tcp-port']}",
+        "--proto udp --dport #{node['ocserv']['config']['udp-port']}"]
+  jump 'ACCEPT'
+end
