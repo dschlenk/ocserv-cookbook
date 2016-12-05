@@ -12,7 +12,7 @@ depends          'line'
 depends          'yum' # not really, except for ChefSpec because chef compat_resource
 depends          'yum-epel'
 depends          'simple_iptables'
-supports         'rhel', '>= 6.8', '< 8.0'
+supports         'rhel', '>= 6.8'
 attribute 'ocserv/config/ipv4-network',
   display_name: 'ipv4-network',
   description: 'The pool of addresses that leases will be given from.\
