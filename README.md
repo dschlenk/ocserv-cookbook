@@ -72,7 +72,7 @@ Depends on the following cookbooks
 
 ### ocserv::default
 
-This recipe installs the `epel-release` package and `ocserv` package from EPEL. If either or both of `node['ocserv']['ipv4-network']` or `node['ocserv']['ipv6-network']` are set, the ocserv service will be enabled and started. On CentOS 7.x firewalld is replaced with iptables. Any configuration key/values added to `node['ocserv']['config']` will be set in the ocserv configuration file and iptables rules are created to allow traffic to the ports specified in `node['ocserv']['config']['tcp-port']` and `node['ocserv']['config']['udp-port']` (both default to 443). 
+This recipe includes `yum-epel::default` and then installs the `ocserv` package from EPEL. If either or both of `node['ocserv']['config']['ipv4-network']` or `node['ocserv']['config']['ipv6-network']` are set, the ocserv service will be enabled and started. On CentOS 7.x firewalld is replaced with iptables. Any configuration key/values added to `node['ocserv']['config']` will be set in the ocserv configuration file and iptables rules are created to allow traffic to the ports specified in `node['ocserv']['config']['tcp-port']` and `node['ocserv']['config']['udp-port']` (both default to 443).
 
 ### ocserv::install_ocserv
 
@@ -81,6 +81,7 @@ If you'd prefer a less comprehensive solution this recipe will only install `epe
 
 ## Custom Resources
 
+### ocserv_config
 The custom resource `ocserv_config` is available for use to change a configuration item without setting node attributes. It is also used internally by the default recipe to apply configuration values specified in `node['ocserv']['config']`.  See the ocserv manual for all options. This resource does not ensure that the keys or values you provide make any sense, but it will accurately replace existing values.  An example:
 
 ```
@@ -101,6 +102,11 @@ ocserv_config 'auth' do
 end
 ```
 
+## Notes
+
+Currently the ocserv package in epel-7 is broken. Since past package versions in EPEL are hard to find, this cookbook currently includes the most recent working x86_64 RPM for RHEL 7. Once [bug 1400693](https://bugzilla.redhat.com/show_bug.cgi?id=1400693) is resolved this will no longer be the case.
+
+
 ## Contributing
 
 1. Fork the repository on BitBucket
@@ -115,5 +121,6 @@ end
 Authors: 
 
 - David Schlenk <dschlenk@convergeone.com>
+- Pete Wall
 
 License: Apache 2.0
