@@ -9,7 +9,7 @@ GRAPH
   compat_resource (12.16.2)
   firewalld (1.1.1)
   line (0.6.3)
-  ocserv (0.1.0)
+  ocserv (0.1.1)
     firewalld (>= 0.0.0)
     line (>= 0.0.0)
     simple_iptables (>= 0.0.0)
