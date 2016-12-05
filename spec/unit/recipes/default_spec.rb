@@ -31,6 +31,31 @@ describe 'ocserv::default' do
       expect(chef_run).to include_recipe('firewalld::disable')
       expect(chef_run).to include_recipe('simple_iptables::default')
     end
+
+    it 'does not enable or start ocserv service' do
+      expect(chef_run).to_not enable_service('ocserv')
+      expect(chef_run).to_not start_service('ocserv')
+    end
+  end
+
+  context 'When an IPv4 network set in attributes on CentOS 7.2' do
+    let(:chef_run) do
+      runner = ChefSpec::ServerRunner.new(platform: 'centos', version: '7.2.1511') do |node|
+        node.default['ocserv']['config']['ipv4-network'] = '10.0.2.16/28'
+      end
+      runner.converge(described_recipe)
+    end
+
+    it 'includes install_ocserv, firewalld::disable, simple_iptables recipes' do
+      expect(chef_run).to include_recipe('ocserv::install_ocserv')
+      expect(chef_run).to include_recipe('firewalld::disable')
+      expect(chef_run).to include_recipe('simple_iptables::default')
+    end
+
+    it 'enables and starts ocserv service' do
+      expect(chef_run).to enable_service('ocserv')
+      expect(chef_run).to start_service('ocserv')
+    end
   end
 
   context 'When all attributes are defaults on CentOS 6.8' do
@@ -42,6 +67,38 @@ describe 'ocserv::default' do
     it 'includes install_ocserv, simple_iptables recipes' do
       expect(chef_run).to include_recipe('ocserv::install_ocserv')
       expect(chef_run).to include_recipe('simple_iptables::default')
+    end
+
+    it 'replaces crappy init script' do
+      expect(chef_run).to create_cookbook_file('/etc/init.d/ocserv')
+    end
+
+    it 'does not enable or start ocserv service' do
+      expect(chef_run).to_not enable_service('ocserv')
+      expect(chef_run).to_not start_service('ocserv')
+    end
+  end
+
+  context 'When an IPv4 network is defined in attributes on CentOS 6.8' do
+    let(:chef_run) do
+      runner = ChefSpec::ServerRunner.new(platform: 'centos', version: '6.8') do |node|
+        node.default['ocserv']['config']['ipv4-network'] = '10.0.2.16/28'
+      end
+      runner.converge(described_recipe)
+    end
+
+    it 'includes install_ocserv, simple_iptables recipes' do
+      expect(chef_run).to include_recipe('ocserv::install_ocserv')
+      expect(chef_run).to include_recipe('simple_iptables::default')
+    end
+
+    it 'replaces crappy init script' do
+      expect(chef_run).to create_cookbook_file('/etc/init.d/ocserv')
+    end
+
+    it 'enables and starts ocserv service' do
+      expect(chef_run).to enable_service('ocserv')
+      expect(chef_run).to start_service('ocserv')
     end
   end
 end
