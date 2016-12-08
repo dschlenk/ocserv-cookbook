@@ -103,6 +103,8 @@ ocserv_config 'auth' do
 end
 ```
 
+Also, when replacing existing values, the new value gets moved to the bottom of the file.
+
 ## Notes
 
 Currently the ocserv package in epel-7 is broken. Since past package versions in EPEL are hard to find, this cookbook currently includes the most recent working x86_64 RPM for RHEL 7. Once [bug 1400693](https://bugzilla.redhat.com/show_bug.cgi?id=1400693) is resolved this will no longer be the case.

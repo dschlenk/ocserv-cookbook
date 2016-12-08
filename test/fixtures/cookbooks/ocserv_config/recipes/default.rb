@@ -31,3 +31,7 @@ end
 ocserv_config 'dtls-psk' do
   value 'true'
 end
+
+ocserv_config 'route' do
+  value ['172.17.10.1', '172.17.13.1', '172.17.13.203']
+end

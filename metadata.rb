@@ -8,8 +8,6 @@ version          '0.1.1'
 issues_url       'https://bitbucket.org/c1c_rnd/ocserv-cookbook/issues'
 source_url       'https://bitbucket.org/c1c_rnd/ocserv-cookbook/src'
 depends          'firewalld'
-depends          'line'
-depends          'yum' # not really, except for ChefSpec because chef compat_resource
 depends          'yum-epel'
 depends          'simple_iptables'
 supports         'rhel', '>= 6.8'
