@@ -1,0 +1,12 @@
+source 'https://rubygems.org'
+
+gem 'berkshelf', '~> 4.3'
+gem 'cookstyle'
+gem 'foodcritic', '~> 7.0'
+gem 'rake', '~> 11.3'
+gem 'test-kitchen', '~> 1.10'
+gem 'kitchen-vagrant', '~> 0.20'
+gem 'stove', '~> 4.1'
+gem 'chefspec', '~> 4.7'
+gem 'fauxhai', '~> 3.5.0'
+gem 'chef', '~> 12.11'

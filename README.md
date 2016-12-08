@@ -1,4 +1,5 @@
 # ocserv Cookbook
+[![Build Status](https://travis-ci.org/dschlenk/ocserv-cookbook.svg?branch=develop)](https://travis-ci.org/dschlenk/ocserv-cookbook)
 
 Installs and configures ocserv, the [OpenConnect server](http://www.infradead.org/ocserv/manual.html).
 
@@ -101,6 +102,8 @@ ocserv_config 'auth' do
   value '"plain[passwd=./sample.passwd,otp=./sample.otp]"'
 end
 ```
+
+Also, when replacing existing values, the new value gets moved to the bottom of the file.
 
 ## Notes
 

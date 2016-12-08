@@ -1,6 +1,6 @@
 resource_name :ocserv_config
 property :name, String, name_property: true, identity: true
-property :value, String, required: true
+property :value, [String, Array], required: true
 default_action :create
 
 action_class do
@@ -16,11 +16,6 @@ end
 
 action :create do
   converge_if_changed do
-    replace_or_add name do
-      path node['ocserv']['config_file']
-      pattern "^#{name} = "
-      line "#{name} = #{value}"
-      notifies :reload, 'service[ocserv]' unless node['ocserv']['config']['ipv4-network'].nil? && node['ocserv']['config']['ipv6-network'].nil?
-    end
+    replace_or_add_config(name, value, node)
   end
 end
